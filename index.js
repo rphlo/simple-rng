@@ -1,26 +1,31 @@
 (function() {
 'use strict';
-  hashCode = function() {
+
+  hashCode = function(str) {
     var hash = 0, i, chr, len;
-    if (this.length == 0) return hash;
-    for (i = 0, len = this.length; i < len; i++) {
-      chr   = this.charCodeAt(i);
+    if (str.length == 0) return hash;
+    for (i = 0, len = str.length; i < len; i++) {
+      chr   = str.charCodeAt(i);
       hash  = ((hash << 5) - hash) + chr;
       hash |= 0; // Convert to 32bit integer
     }
     return Math.abs(hash | hash);
   };
 
-  function RNG(seed) {
+  function RNG(str) {
     // LCG using GCC's constants
     if(!(this instanceof RNG)){
       return new RNG(seed);
     }
 
-    var _m = 0x80000000, // 2**31;
-        _a = 1103515245,
-        _c = 12345,
-        _state = seed ? ((seed instanceof String)?seed.hashCode():seed) : Math.floor(Math.random() * (_m-1));
+    var _m, _a, _c, _state;
+    var seed = function(str) {
+      _m = 0x80000000, // 2**31;
+      _a = 1103515245,
+      _c = 12345,
+      _state = str ? ((str instanceof String) ? hashCode(str) : str) : Math.floor(Math.random() * (_m-1));
+    }
+    seed(str);
 
     var randInt = function(){
       _state = (_a * _state + _c) % _m;
@@ -57,21 +62,26 @@
     var randChoice = function(array) {
       return array[randRange(0, array.length)];
     }
+  
     var randBool = function(probTruth){
       return random() < probTruth;
     }
+  
+
     return {
       random: random,
       randInt: randInt,
       randRange: randRange,
       randFloatRange: randFloatRange,
       randChoice: randChoice,
-      randBool: randBool
+      randBool: randBool,
+      seed: seed,
     }
   }
-
+  
+  const random = RNG();
 	// export in common js
 	if( typeof module !== "undefined" && ('exports' in module)){
-		module.exports = RNG;
+		module.exports = random;
 	}
 })();
