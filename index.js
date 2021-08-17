@@ -1,7 +1,7 @@
 (function() {
 'use strict';
 
-  var hashCode = function(str) {
+  function hashCode (str) {
     var hash = 0, i, chr, len;
     if (str.length == 0) return hash;
     for (i = 0, len = str.length; i < len; i++) {
@@ -11,6 +11,14 @@
     }
     return Math.abs(hash | hash);
   };
+
+  function isInt(n){
+    return Number(n) === n && n % 1 === 0;
+  }
+
+  function isFloat(n){
+      return Number(n) === n;
+  }
 
   function RNG(str) {
     // LCG using GCC's constants
@@ -43,9 +51,18 @@
         end = start;
         start = 0;
       }
+
+      if (end < start) {
+        throw new Error('end must be more than start');
+      }
+
+      if (!isInt(end) || !isInt(start)) {
+        throw new Error('parameters must be integers');
+      }
+
       var rangeSize = end - start,
           randomUnder1 = randInt() / _m;
-      return parseFloat(start + Math.floor(randomUnder1 * rangeSize));
+      return parseInt(start + Math.floor(randomUnder1 * rangeSize), 10);
     }
     
     var randFloatRange = function(start, end) {
@@ -54,16 +71,34 @@
         end = start;
         start = 0;
       }
+
+      if (end < start) {
+        throw new Error('end must be more than start');
+      }
+
+      if (!isFloat(end) || !isFloat(start)) {
+        throw new Error('parameters must be numbers');
+      }
+
       var rangeSize = end - start,
           randomUnder1 = randInt() / _m;
       return parseFloat(start + randomUnder1 * rangeSize);
     }
 
     var randChoice = function(array) {
+      if (!array instanceof Array) {
+        throw new Error('parameters must an array');
+      }
+      if (!array.length) {
+        throw new Error('empty array');
+      }
       return array[randRange(0, array.length)];
     }
   
     var randBool = function(probTruth){
+      if (probTruth == null) {
+        probTruth = 0.5;
+      }
       return random() < probTruth;
     }
   
