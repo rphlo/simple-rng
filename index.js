@@ -1,7 +1,7 @@
 (function() {
 'use strict';
 
-  hashCode = function(str) {
+  var hashCode = function(str) {
     var hash = 0, i, chr, len;
     if (str.length == 0) return hash;
     for (i = 0, len = str.length; i < len; i++) {
