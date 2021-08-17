@@ -14,4 +14,5 @@ random.randRange(start, end); // return a random number in range [start, end): i
 random.randFloatRange(floatStart, floatEnd); // returns in range [start, end): including start, excluding end
 random.randChoice(array); // return a random item from array
 random.randBool(probTruth); // return a random boolean with probTruth probability of being true
+random.seed(value); // seed the random generator
 ```

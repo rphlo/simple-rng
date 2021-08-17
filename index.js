@@ -23,7 +23,8 @@
       _m = 0x80000000, // 2**31;
       _a = 1103515245,
       _c = 12345,
-      _state = str ? ((str instanceof String) ? hashCode(str) : str) : Math.floor(Math.random() * (_m-1));
+      _state = str ? ((typeof(str) == 'number') ? Math.floor(str) : hashCode(new String(str)) ) : Math.floor(Math.random() * (_m-1));
+      console.log(_state, hashCode('test'))
     }
     seed(str);
 
