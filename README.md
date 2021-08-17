@@ -1,5 +1,6 @@
 # simple-rng
-Simple Javascript RNG that can take a seed.
+Simple Javascript Random Number Generator that can take a seed.  
+Try to use same methods than the ones available in python random module.
 
 Usage:
 
