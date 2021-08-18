@@ -52,12 +52,12 @@
         start = 0;
       }
 
-      if (end < start) {
-        throw new Error('end must be more than start');
-      }
-
       if (!isInt(end) || !isInt(start)) {
         throw new Error('parameters must be integers');
+      }
+
+      if (end < start) {
+        throw new Error('end must be more than start');
       }
 
       var rangeSize = end - start,
@@ -72,12 +72,12 @@
         start = 0;
       }
 
-      if (end < start) {
-        throw new Error('end must be more than start');
-      }
-
       if (!isFloat(end) || !isFloat(start)) {
         throw new Error('parameters must be numbers');
+      }
+
+      if (end < start) {
+        throw new Error('end must be more than start');
       }
 
       var rangeSize = end - start,
@@ -101,7 +101,6 @@
       }
       return random() < probTruth;
     }
-  
 
     return {
       random: random,
@@ -114,9 +113,9 @@
     }
   }
   
-  const random = RNG();
+  global.simpleRNG = RNG();
 	// export in common js
-	if( typeof module !== "undefined" && ('exports' in module)){
-		module.exports = random;
-	}
+  if( typeof module !== "undefined" && ('exports' in module)){
+    module.exports = global.simpleRNG;
+  }
 })();

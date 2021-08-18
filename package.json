@@ -2,9 +2,10 @@
   "name": "simple-rng",
   "version": "1.1.0",
   "description": "Simple RNG that can take a seed",
-  "main": "index.js",
+  "main": "dist/main.js",
   "scripts": {
-    "test": "node test.js"
+    "test": "node test.js",
+    "build": "browserify -t deamdify -t es6ify -t deglobalify -p tinyify index.js -o dist/main.js"
   },
   "repository": {
     "type": "git",
@@ -13,12 +14,23 @@
   "keywords": [
     "rng",
     "random",
-    "choices"
+    "number",
+    "generator",
+    "range",
+    "choices",
+    "seed"
   ],
   "author": "Raphaël Stefanini",
   "license": "SEE LICENSE IN LICENSE",
   "bugs": {
     "url": "https://github.com/rphlo/simple-rng/issues"
   },
-  "homepage": "https://github.com/rphlo/simple-rng#readme"
+  "homepage": "https://github.com/rphlo/simple-rng#readme",
+  "dependencies": {
+    "browserify": "^17.0.0",
+    "deamdify": "^0.3.0",
+    "deglobalify": "^0.2.0",
+    "es6ify": "^1.6.0",
+    "tinyify": "^3.0.0"
+  }
 }
