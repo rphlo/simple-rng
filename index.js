@@ -113,9 +113,10 @@
     }
   }
   
-  global.simpleRNG = RNG();
+  var simpleRNG = RNG();
+  global.simpleRNG = simpleRNG;
 	// export in common js
   if( typeof module !== "undefined" && ('exports' in module)){
-    module.exports = global.simpleRNG;
+    module.exports = simpleRNG;
   }
 })();

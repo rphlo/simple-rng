@@ -2,10 +2,10 @@
   "name": "simple-rng",
   "version": "1.2.0",
   "description": "Simple RNG that can take a seed",
-  "main": "dist/main.js",
+  "main": "index.js",
   "scripts": {
     "test": "node test.js",
-    "build": "browserify -t deamdify -t es6ify -t deglobalify -p tinyify index.js -o dist/main.js"
+    "build": "browserify -t deamdify -t es6ify -t deglobalify -p tinyify index.js -o dist/simple-rng.min.js"
   },
   "repository": {
     "type": "git",
