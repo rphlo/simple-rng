@@ -1,6 +1,6 @@
 {
   "name": "simple-rng",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Simple RNG that can take a seed",
   "main": "index.js",
   "scripts": {
